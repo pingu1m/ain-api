@@ -46,8 +46,14 @@ async def index():
     return response
 
 
-@app.get("/search/{search_type}", response_model=SearchOut, tags=['search'])
+@app.get("/search/{search_type}", response_model=SearchOut, tags=['search'], summary="Search endpoint")
 def search(search_type: SearchType = 'all', q: str = None):
+    """
+    Search for a term in the AIN data repository
+
+    - **search_type**: each item must have a name
+    - **q**: term to search for
+    """
     if search_type == SearchType.all:
         if q:
             results = get_results(q)
