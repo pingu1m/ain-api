@@ -1,0 +1,22 @@
+version: '3'
+services:
+  api:
+    image: app:localdev
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-new
+    ports:
+      - "8888:8888"
+      - "8000:8000"
+      - "8080:8080"
+    network_mode: host
+#    environment:
+#      - GUNICORN_CMD_ARGS="--reload"  # Don't include - doesn't work    # Use ONE of the two commands below to
+    #   auto-reload when developing    # will track everything in sys.path and can use a lot of CPU
+#    command: ["/start-reload.sh"]    # will only track files in /app directory
+#    command: uvicorn main:app --host 0.0.0.0 --port 8888
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--debug", "--port", "8080", "--reload-dir", "./"]
+#    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+    volumes:
+      - ./ainapi:/app
+
