@@ -1,5 +1,5 @@
 from elasticsearch import Elasticsearch
-from .config import ES_CLIENT_URL
+from config import ES_CLIENT_URL
 
 # es_client = Elasticsearch(["elastic:changeme@localhost:9200"])
 es_client = Elasticsearch([ES_CLIENT_URL])

@@ -11,6 +11,7 @@ elasticsearch = "*"
 fastapi = "*"
 uvicorn = "*"
 python-dotenv = "*"
+sqlalchemy = "*"
 
 [requires]
 python_version = "3.8"

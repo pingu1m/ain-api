@@ -4,8 +4,7 @@ from typing import List, Optional
 from fastapi import FastAPI
 from pydantic.main import BaseModel
 from starlette.responses import RedirectResponse
-from .search_db import get_results
-from .search_es import get_es_results
+from services import search_db, search_es
 
 app = FastAPI(
     title="AIN API",
@@ -56,8 +55,8 @@ def search(search_type: SearchType = 'all', q: str = None):
     """
     if search_type == SearchType.all:
         if q:
-            results = get_results(q)
-            results['lattesuser'] = get_es_results(q)
+            results = search_db.get_results(q)
+            results['lattesuser'] = search_es.get_es_results(q)
             return results
         return {
             "error": "Please specify a search term",
